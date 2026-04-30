@@ -1,0 +1,39 @@
+[gd_scene load_steps=3 format=3 uid="uid://e673v7qxrr2a"]
+
+[ext_resource type="Texture2D" uid="uid://cyd7vwlx7dqek" path="res://istockphoto-1010813026-612x612.jpg" id="1_6tqos"]
+[ext_resource type="Script" path="res://controls.gd" id="1_turxq"]
+
+[node name="Controls" type="Node2D"]
+script = ExtResource("1_turxq")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1156.0
+offset_bottom = 643.0
+texture = ExtResource("1_6tqos")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 51.0
+offset_top = 131.0
+offset_right = 247.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 25
+text = "W Forward
+A Left
+S Back
+D Right
+Shift Sprint
+Space Jump
+LMB Shoot"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="TextureRect"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 465.0
+offset_right = 362.0
+offset_bottom = 559.0
+theme_override_font_sizes/font_size = 26
+text = "Back To Menu"
+
+[connection signal="pressed" from="TextureRect/Back" to="." method="_on_back_pressed"]

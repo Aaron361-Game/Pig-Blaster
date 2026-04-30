@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ca7gkjuessf2p"]
+
+[ext_resource type="PackedScene" uid="uid://ditt60nu65k51" path="res://PS1 Pig.glb" id="1_mhqi8"]
+
+[node name="PS1 Pig" instance=ExtResource("1_mhqi8")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/4/rotation = Quaternion(0.766928, 0, 0, 0.641734)

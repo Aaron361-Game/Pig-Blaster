@@ -1,0 +1,194 @@
+[gd_scene format=3 uid="uid://cj5gbdw2f2t6j"]
+
+[ext_resource type="Script" uid="uid://c80q446ejt5bs" path="res://World.gd" id="1_58b17"]
+[ext_resource type="Texture2D" uid="uid://dtnc5hfy1wg6s" path="res://696.jpg" id="1_bcwbc"]
+[ext_resource type="PackedScene" uid="uid://ctv0bdug23e3r" path="res://player.tscn" id="2_y0sxx"]
+[ext_resource type="PackedScene" uid="uid://c2vo20krf8hcr" path="res://Arena.tscn" id="3_ilrpd"]
+[ext_resource type="Script" uid="uid://bkkvbacxpehpg" path="res://WaveManager.gd" id="5_shfxy"]
+[ext_resource type="PackedScene" uid="uid://c017amyjj5pw0" path="res://enemy.tscn" id="6_ha53j"]
+[ext_resource type="PackedScene" uid="uid://omsc5tk8wmsy" path="res://Boss.tscn" id="7_1xu5t"]
+[ext_resource type="AudioStream" uid="uid://b4b0yjlx6jeao" path="res://inono777-combat-epic-425365.mp3" id="8_bah7m"]
+[ext_resource type="PackedScene" uid="uid://dtfk6xmr5lnmg" path="res://pause_menu.tscn" id="9_fv4w7"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_yxige"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_vpa7k"]
+sky_material = SubResource("ProceduralSkyMaterial_yxige")
+
+[sub_resource type="Environment" id="Environment_jdgkq"]
+background_mode = 2
+sky = SubResource("Sky_vpa7k")
+tonemap_mode = 2
+glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.0579
+volumetric_fog_albedo = Color(0.635294, 0.454902, 0.454902, 1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o3ois"]
+vertices = PackedVector3Array(-81.6594, 0.520669, -87.6653, -81.6594, 0.520669, 95.5847, 108.091, 0.520669, 95.5847, 108.091, 0.520669, -87.6653)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rrx4t"]
+albedo_texture = ExtResource("1_bcwbc")
+albedo_texture_force_srgb = true
+
+[node name="Node3D" type="Node3D" unique_id=699633652]
+script = ExtResource("1_58b17")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=99827581]
+environment = SubResource("Environment_jdgkq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=60929367]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+light_color = Color(0.976471, 0.72549, 0.733333, 1)
+shadow_enabled = true
+
+[node name="Player" parent="." unique_id=845165215 instance=ExtResource("2_y0sxx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04029, 0.05816108)
+
+[node name="Sketchfab_Scene" parent="." unique_id=1381114551 instance=ExtResource("3_ilrpd")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 0, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=801128308]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.530446, 0)
+navigation_mesh = SubResource("NavigationMesh_o3ois")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D" unique_id=1591518134]
+transform = Transform3D(-150, 0, 2.26494e-05, 0, 1.35, 0, -2.26494e-05, 0, -150, 13.2706, -0.554331, 3.96424)
+use_collision = true
+size = Vector3(1.2724, 1, 1.22839)
+material = SubResource("StandardMaterial3D_rrx4t")
+
+[node name="WaveManager" type="Node3D" parent="." unique_id=840816523 node_paths=PackedStringArray("enemies_left_label", "kill_notification_label", "end_screen", "result_label", "restart_button", "main_menu_button", "boss_health_bar", "boss_health_bar_2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.98802, 1.29202, -7.22016)
+script = ExtResource("5_shfxy")
+enemy_scene = ExtResource("6_ha53j")
+enemies_left_label = NodePath("../WaveUI/EnemiesLeftLabel")
+kill_notification_label = NodePath("../WaveUI/KillNotification")
+end_screen = NodePath("../WaveUI/EndScreen")
+result_label = NodePath("../WaveUI/EndScreen/ResultLabel")
+restart_button = NodePath("../WaveUI/EndScreen/RestartButton")
+main_menu_button = NodePath("../WaveUI/EndScreen/MainMenuButton")
+boss_scene = ExtResource("7_1xu5t")
+boss_health_bar = NodePath("../WaveUI/BossHealthBar")
+boss_health_bar_2 = NodePath("../WaveUI/BossHealthBar2")
+
+[node name="UI" type="Node2D" parent="." unique_id=1558083895]
+
+[node name="Health Bar" type="Node2D" parent="UI" unique_id=1736050544]
+
+[node name="ProgressBar" type="ProgressBar" parent="UI/Health Bar" unique_id=60521317]
+offset_left = 27.0
+offset_top = 536.0
+offset_right = 295.0
+offset_bottom = 613.0
+theme_override_colors/font_color = Color(0, 1, 0, 1)
+theme_override_font_sizes/font_size = 40
+value = 100.0
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1399395922]
+position = Vector2(581, 312)
+
+[node name="Crosshair" type="Node2D" parent="Node2D" unique_id=73388324]
+
+[node name="Label" type="Label" parent="Node2D/Crosshair" unique_id=1108561463]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.5
+offset_top = -35.0
+offset_right = 41.5
+offset_bottom = 35.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 40
+text = "+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WaveUI" type="CanvasLayer" parent="." unique_id=849441963]
+
+[node name="EnemiesLeftLabel" type="Label" parent="WaveUI" unique_id=1331457428]
+offset_left = 16.0
+offset_top = 449.0
+offset_right = 219.0
+offset_bottom = 521.0
+
+[node name="KillNotification" type="Label" parent="WaveUI" unique_id=1123775572]
+offset_left = 982.0
+offset_top = 62.0
+offset_right = 1142.0
+offset_bottom = 137.0
+
+[node name="EndScreen" type="Panel" parent="WaveUI" unique_id=2125954058]
+process_mode = 3
+visible = false
+offset_right = 1148.0
+offset_bottom = 646.0
+
+[node name="ResultLabel" type="Label" parent="WaveUI/EndScreen" unique_id=1019755814]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -99.5
+offset_top = -223.0
+offset_right = 99.5
+offset_bottom = -160.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 45
+text = "YOU WIN"
+
+[node name="RestartButton" type="Button" parent="WaveUI/EndScreen" unique_id=1264189539]
+layout_mode = 0
+offset_left = 423.0
+offset_top = 389.0
+offset_right = 739.0
+offset_bottom = 465.0
+theme_override_font_sizes/font_size = 28
+text = "Restart Game"
+
+[node name="MainMenuButton" type="Button" parent="WaveUI/EndScreen" unique_id=34134347]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 484.0
+offset_right = 739.0
+offset_bottom = 562.0
+theme_override_font_sizes/font_size = 32
+text = "Main Menu"
+
+[node name="BossHealthBar" type="ProgressBar" parent="WaveUI" unique_id=250298006]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -275.5
+offset_right = 275.5
+offset_bottom = 69.0
+grow_horizontal = 2
+show_percentage = false
+
+[node name="BossHealthBar2" type="ProgressBar" parent="WaveUI" unique_id=288675952]
+visible = false
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -276.0
+offset_top = 88.0
+offset_right = 275.0
+offset_bottom = 154.0
+grow_horizontal = 2
+show_percentage = false
+
+[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=551561444]
+stream = ExtResource("8_bah7m")
+autoplay = true
+
+[node name="PauseMenu" parent="." unique_id=1857666394 instance=ExtResource("9_fv4w7")]

@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://c684qg4ifgrpp"]
+
+[ext_resource type="Script" path="res://menu.gd" id="1_dgogv"]
+[ext_resource type="Texture2D" uid="uid://cyd7vwlx7dqek" path="res://istockphoto-1010813026-612x612.jpg" id="1_j5hqw"]
+
+[node name="Menu" type="Node2D"]
+script = ExtResource("1_dgogv")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 1156.0
+offset_bottom = 643.0
+texture = ExtResource("1_j5hqw")
+
+[node name="Title" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 216.0
+offset_right = 924.0
+offset_bottom = 105.0
+theme_override_font_sizes/font_size = 70
+text = "Pig Blaster"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Creator Tag" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_left = 926.0
+offset_top = 536.0
+offset_right = 1150.0
+offset_bottom = 637.0
+text = "By Aaron Geoghegan"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Start" type="Button" parent="."]
+offset_left = -2.0
+offset_top = 248.0
+offset_right = 324.0
+offset_bottom = 325.0
+theme_override_font_sizes/font_size = 50
+text = "Play"
+
+[node name="Controls" type="Button" parent="."]
+offset_left = 2.0
+offset_top = 494.0
+offset_right = 334.0
+offset_bottom = 580.0
+theme_override_font_sizes/font_size = 38
+text = "Controls"
+
+[node name="HardModeToggle" type="CheckButton" parent="."]
+offset_top = 330.0
+offset_right = 284.0
+offset_bottom = 428.0
+theme_override_font_sizes/font_size = 33
+text = "Hard Mode"
+alignment = 1
+
+[connection signal="pressed" from="Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Controls" to="." method="_on_controls_pressed"]
+[connection signal="toggled" from="HardModeToggle" to="." method="_on_hard_mode_toggle_toggled"]

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cny3yo255osut"]
+
+[ext_resource type="Script" path="res://Bullet.gd" id="1_fx8ue"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_amkbe"]
+size = Vector3(0.2, 0.2, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8a8q6"]
+albedo_color = Color(0.960784, 0.972549, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t8e7n"]
+material = SubResource("StandardMaterial3D_8a8q6")
+size = Vector3(0.2, 0.2, 1)
+
+[node name="Bullet" type="CharacterBody3D"]
+script = ExtResource("1_fx8ue")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_amkbe")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_t8e7n")

@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2vo20krf8hcr"]
+
+[ext_resource type="PackedScene" uid="uid://40h6howfmalf" path="res://circle_of_death.glb" id="1_63a6i"]
+
+[node name="Sketchfab_Scene" instance=ExtResource("1_63a6i")]
+transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 0.01, 0, 0, 0)
