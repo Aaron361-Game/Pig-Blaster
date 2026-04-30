@@ -37,8 +37,8 @@ func start_next_wave():
 	var enemies_to_spawn = waves[current_wave]
 	
 	
-	if Global.hard_mode == true:
-		enemies_to_spawn *= 2 
+	#if Global.hard_mode == true:
+		#enemies_to_spawn *= 2 
 	
 	
 	print("Starting Wave ", current_wave + 1, " with ", enemies_to_spawn, " enemies!")
