@@ -93,7 +93,7 @@ func trigger_game_over(is_win: bool):
 		result_label.text = "GAME OVER!"
 		result_label.modulate = Color(1, 0, 0) 
 		
-	get_tree().paused = true
+	#get_tree().paused = true
 
 func restart_game():
 	get_tree().paused = false
